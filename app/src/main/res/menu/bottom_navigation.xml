@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:id="@+id/nav_home"
+    android:icon="@drawable/ic_view_list_black_24dp"
+    android:title="@string/menu_element_home"/>
+    <item
+        android:id="@+id/nav_graph"
+        android:icon="@drawable/ic_graphic_eq_black_24dp"
+        android:title="@string/menu_element_graph"/>
+    <item
+        android:id="@+id/nav_regist"
+        android:icon="@drawable/ic_add_box_black_24dp"
+        android:title="@string/menu_element_register"/>
+
+</menu>

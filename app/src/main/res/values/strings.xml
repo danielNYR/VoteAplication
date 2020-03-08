@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">VoteAplication</string>
+    <string name="menu_element_home">Inicio</string>
+    <string name="menu_element_graph">Gráficas</string>
+    <string name="menu_element_register">Registrar</string>
+
+    <!--Recursos del Fragment Registro-->
+    <string name="register_element_name">Nombre</string>
+    <string name="register_element_partido">Partido</string>
+    <string name="register_element_acronimo">Acrónimo</string>
+    <string name="register_element_boton">REGISTRAR</string>
+    <!--Recursos del Fragmen de vista-->
+    <string name="view_element_boton">VOTAR</string>
+    <!--Valores del Item candidato-->
+    <string name="item_candidato_votos">Votos</string>
+</resources>
