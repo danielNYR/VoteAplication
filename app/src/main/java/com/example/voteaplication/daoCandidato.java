@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -38,10 +39,23 @@ public class daoCandidato {
         return (conextion.insert("candidato", null, contentValues))>0;
     }
 
-    public boolean update_votos(int id){
+    public boolean update_votos(String acronimo){
         final int votoSumado = 1;
+        ContentValues contentValues = new ContentValues();
+        Cursor database = conextion.rawQuery("select * from candidato where candidatoAcronimo ='"+acronimo+"';", null);
+        if(database != null && database.getCount()>0){
+            database.moveToFirst(); //Se mueve al primero...que debería ser el único
+            contentValues.put("candidatoId", database.getString(0));
+            contentValues.put("candidatoNombre", database.getString(1));
+            contentValues.put("candidatoPartido", database.getString(2));
+            contentValues.put("candidatoAcronimo", database.getString(3));
+            contentValues.put("candidatoVotos", (database.getInt(4) + 1));
+            Toast.makeText(context, "Se ha realizado el voto", Toast.LENGTH_SHORT).show();
+            return (conextion.update("candidato", contentValues, "candidatoId="+database.getInt(0), null)) > 0;
+        }else{
+            return false;
+        }
 
-        return true;
     }
 
     public ArrayList<Candidato>getListaCandidato(){
