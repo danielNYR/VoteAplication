@@ -15,12 +15,14 @@ public class MyReceiver extends BroadcastReceiver {
     private static final String TAG = "SmsBrodadCastReceiver";
     String msg, phoneNo = "";
     daoCandidato daoCandidato;
+    daoParticipante daoParticipante;
     @Override
     public void onReceive(Context context, Intent intent) {
         // TODO: This method is called when the BroadcastReceiver is receiving
         // an Intent broadcast.
         Log.i(TAG, "Intent Received" + intent.getAction());
         daoCandidato = new daoCandidato(context);
+        daoParticipante = new daoParticipante(context);
         if(intent.getAction()==SMS_RECEIVED){
             Bundle dataBundle = intent.getExtras();
             if(dataBundle != null){
@@ -37,7 +39,18 @@ public class MyReceiver extends BroadcastReceiver {
                     msg = message[i].getMessageBody();
                     phoneNo = message[i].getOriginatingAddress();
                 }
-                daoCandidato.update_votos(msg);
+                if(daoParticipante.ifexists(phoneNo)){
+                    //Se envía el mensaje.
+                }else{
+                    if (daoCandidato.ifexists(msg)){
+                        daoParticipante.insert_participante(new Participante(phoneNo, msg));
+                        daoCandidato.update_votos(msg);
+                    }else{
+                        //El mensaje del usuario no es válido por lo cual no se registrará dentro del sistema
+                    }
+
+                }
+
                 String cadenaMensaje = "Message: " + msg + "\nPhone Number" + phoneNo;
                 Toast.makeText(context, cadenaMensaje, Toast.LENGTH_LONG).show();
             }

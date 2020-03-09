@@ -53,12 +53,12 @@ public class Adaptador extends BaseAdapter {
         View vista = convertView;
         if(vista != null){
             LayoutInflater layoutInflater = (LayoutInflater) a.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            vista = layoutInflater.inflate(R.layout.item_candidato, null);
+            vista = layoutInflater.inflate(R.layout.item_participante, null);
         }
         obj_candidato = listaCandidatos.get(position);
 
         //TextView name = (TextView) vista.findViewById(R.id.txt_nombre);
-        TextView nombre = (TextView) vista.findViewById(R.id.txt_nombre);
+        /*TextView nombre = (TextView) vista.findViewById(R.id.txt_nombre);
         TextView partido = (TextView)vista.findViewById(R.id.txt_partido);
         TextView acronimo = (TextView)vista.findViewById(R.id.txt_acronimo);
         TextView votos = (TextView)vista.findViewById(R.id.txt_votos);
@@ -67,7 +67,7 @@ public class Adaptador extends BaseAdapter {
         partido.setText(listaCandidatos.get(position).candidatoPartido);
         acronimo.setText(listaCandidatos.get(position).candidatoAcronimo);
         votos.setText(""+ listaCandidatos.get(position).candidatoVotos);
-
+*/
         return vista;
     }
 }

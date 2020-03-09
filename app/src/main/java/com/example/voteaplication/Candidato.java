@@ -26,6 +26,8 @@ public class Candidato {
         this.candidatoVotos = candidatoVotos;
     }
 
+
+
     public int getCandidatoId() {
         return candidatoId;
     }

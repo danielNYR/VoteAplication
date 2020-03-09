@@ -6,7 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.PieEntry;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class daoCandidato {
 
@@ -17,7 +22,6 @@ public class daoCandidato {
     String dbName = "DBVotos";
     String create_table = "create table if not exists candidato(candidatoId integer primary key autoincrement, candidatoNombre text, " +
             "candidatoPartido text, candidatoAcronimo text, candidatoVotos integer)";
-    String create_table_numeros = "create table if not exist telefono_participante(telefonoId integer primary key autoincrement, telefono text)";
 
     public daoCandidato() {
     }
@@ -37,6 +41,41 @@ public class daoCandidato {
         contentValues.put("candidatoVotos", candidato.getCandidatoVotos());
 
         return (conextion.insert("candidato", null, contentValues))>0;
+    }
+
+    public boolean ifexists(String acronimo){
+        ContentValues contentValues = new ContentValues();
+        Cursor database = conextion.rawQuery("select * from candidato where candidatoAcronimo ='"+acronimo+"';", null);
+        if(database != null && database.getCount()>0){
+            return true; //Se ha encontrado que ya ha participado
+        }else{
+            return false;
+        }
+    }
+
+    ArrayList<PieEntry> listaVotos = new ArrayList<>();
+    public ArrayList<PieEntry>getListaVotos(){
+        listaVotos.clear();
+        Cursor database = conextion.rawQuery("select * from candidato", null);
+        if(database != null && database.getCount()>0){
+            //listaVotos.add(new PieEntry(18.5f, "Green"));
+            //listaVotos.add(new PieEntry(26.7f, "Yellow"));
+            //listaVotos.add(new PieEntry(24.0f, "Red"));
+            //listaVotos.add(new PieEntry(30.8f, "Blue"));
+            database.moveToFirst();
+            do {
+                //add(new PieEntry(18.5f, "Green"));
+                //Toast.makeText(context, database.getString(2), Toast.LENGTH_SHORT);
+                listaVotos.add(new PieEntry(database.getInt(4), database.getString(3)));//new Votos(, ));
+
+               /* listaCandidato.add(new Candidato(database.getInt(0),
+                        database.getString(1),
+                        database.getString(2),
+                        database.getString(3),
+                        database.getInt(4)));*/
+            }while (database.moveToNext());
+        }
+        return listaVotos;
     }
 
     public boolean update_votos(String acronimo){

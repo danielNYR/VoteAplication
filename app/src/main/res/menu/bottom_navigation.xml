@@ -12,5 +12,9 @@
         android:id="@+id/nav_regist"
         android:icon="@drawable/ic_add_box_black_24dp"
         android:title="@string/menu_element_register"/>
+    <item
+        android:id="@+id/nav_phones"
+        android:icon="@drawable/ic_perm_phone_msg_black_24dp"
+        android:title="@string/menu_element_participantes"/>
 
 </menu>

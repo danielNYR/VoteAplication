@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
-    private  static  final int MY_PERMISSIONS_REQYEST_RECEIVE_SMS = 0;
+    private  static  final int MY_PERMISSIONS_REQUEST_RECEIVE_SMS = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_regist:
                         fragment = new RegisterFragment();
                         break;
+                    case R.id.nav_phones:
+                        fragment = new PhonesFragment();
+                        break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentInicio, fragment).commit();
                 return true;
@@ -58,31 +61,29 @@ public class MainActivity extends AppCompatActivity {
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECEIVE_SMS)){
 
             }else{
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_SMS}, MY_PERMISSIONS_REQYEST_RECEIVE_SMS);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_SMS}, MY_PERMISSIONS_REQUEST_RECEIVE_SMS);
             }
         }
     }//On create
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            // ...
-            case MY_PERMISSIONS_REQYEST_RECEIVE_SMS:
-                if (resultCode == RESULT_OK) {
-                    Toast.makeText(this, "¡Gracias por el permiso, joke!", Toast.LENGTH_SHORT).show();
-                    // Get SMS message content
-                    //String message = data.getStringExtra(SmsRetriever.EXTRA_SMS_MESSAGE);
-                    // Extract one-time code from the message and complete verification
-                    // `sms` contains the entire text of the SMS message, so you will need
-                    // to parse the string.
-                    //String oneTimeCode = parseOneTimeCode(message); // define this function
+        // ...
+        if (requestCode == MY_PERMISSIONS_REQUEST_RECEIVE_SMS) {
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(this, "¡Gracias por el permiso, joke!", Toast.LENGTH_SHORT).show();
+                // Get SMS message content
+                //String message = data.getStringExtra(SmsRetriever.EXTRA_SMS_MESSAGE);
+                // Extract one-time code from the message and complete verification
+                // `sms` contains the entire text of the SMS message, so you will need
+                // to parse the string.
+                //String oneTimeCode = parseOneTimeCode(message); // define this function
 
-                    // send one time code to the server
-                } else {
-                    // Consent canceled, handle the error ...
-                    Toast.makeText(this, "No puedo hacer nada sino tengo permisos.", Toast.LENGTH_SHORT).show();
-                }
-                break;
+                // send one time code to the server
+            } else {
+                // Consent canceled, handle the error ...
+                Toast.makeText(this, "No puedo hacer nada sino tengo permisos.", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
