@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public class VistaCandidatos extends AppCompatActivity {
 
     daoCandidato obj_datoCandidato; //dao
-    Adaptador adaptador;
     ArrayList<Candidato> listaCandidato;
     ListView lview;
     Button boton;

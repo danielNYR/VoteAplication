@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 import android.util.Log;
 import android.widget.Toast;
@@ -41,6 +42,10 @@ public class MyReceiver extends BroadcastReceiver {
                 }
                 if(daoParticipante.ifexists(phoneNo)){
                     //Se envía el mensaje.
+                    String mensajeDefault = "Usted ya ha participado previamente. No puede hacerlo 2 veces";
+                    Toast.makeText(context, "Este usuario ya ha participado", Toast.LENGTH_LONG).show();
+                    enviarMensaje(phoneNo, mensajeDefault, context);
+
                 }else{
                     if (daoCandidato.ifexists(msg)){
                         daoParticipante.insert_participante(new Participante(phoneNo, msg));
@@ -56,5 +61,21 @@ public class MyReceiver extends BroadcastReceiver {
             }
 
         }
+    }
+
+    public void enviarMensaje(String numero, String mensaje, Context context)
+    {
+
+        try
+        {
+            SmsManager sms =  SmsManager.getDefault();
+            sms.sendTextMessage(numero,null,mensaje,null,null);
+            Toast.makeText(context,"Mensaje enviado correctamente!!!",Toast.LENGTH_LONG).show();
+
+        }catch (Exception e)
+        {
+            Toast.makeText(context,"Mensaje no enviado",Toast.LENGTH_LONG).show();
+        }
+
     }
 }

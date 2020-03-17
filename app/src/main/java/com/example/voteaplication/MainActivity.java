@@ -27,6 +27,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.bottomMenu);
+
+        if(ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.SEND_SMS)
+                != PackageManager.PERMISSION_GRANTED&& ActivityCompat.checkSelfPermission(
+                MainActivity.this,Manifest
+                        .permission.SEND_SMS)!= PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(MainActivity.this,new String[]
+                    { Manifest.permission.SEND_SMS,},1000);
+        }else{
+            Toast.makeText(this, "El usuario no ha concedido los permisos", Toast.LENGTH_SHORT).show();
+            //System.exit(0);
+        };
+
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentInicio, new HomeFragment()).commit();
         }

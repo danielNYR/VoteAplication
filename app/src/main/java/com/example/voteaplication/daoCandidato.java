@@ -5,13 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
-
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class daoCandidato {
 
@@ -58,21 +54,9 @@ public class daoCandidato {
         listaVotos.clear();
         Cursor database = conextion.rawQuery("select * from candidato", null);
         if(database != null && database.getCount()>0){
-            //listaVotos.add(new PieEntry(18.5f, "Green"));
-            //listaVotos.add(new PieEntry(26.7f, "Yellow"));
-            //listaVotos.add(new PieEntry(24.0f, "Red"));
-            //listaVotos.add(new PieEntry(30.8f, "Blue"));
             database.moveToFirst();
             do {
-                //add(new PieEntry(18.5f, "Green"));
-                //Toast.makeText(context, database.getString(2), Toast.LENGTH_SHORT);
                 listaVotos.add(new PieEntry(database.getInt(4), database.getString(3)));//new Votos(, ));
-
-               /* listaCandidato.add(new Candidato(database.getInt(0),
-                        database.getString(1),
-                        database.getString(2),
-                        database.getString(3),
-                        database.getInt(4)));*/
             }while (database.moveToNext());
         }
         return listaVotos;
