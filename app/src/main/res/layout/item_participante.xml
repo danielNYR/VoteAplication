@@ -5,7 +5,11 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="2dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,9 +25,14 @@
 
             <TextView
                 android:id="@+id/tv_PVoto"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/message_type"
+                android:text="TextView"
+                android:textColor="@color/colorTextIcons" />
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
